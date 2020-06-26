@@ -10,6 +10,15 @@ import AppError from './errors/AppError';
 import createConnection from './database';
 
 createConnection();
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { types } = require('pg');
+
+// eslint-disable-next-line func-names
+types.setTypeParser(1700, function (val: string) {
+  return parseFloat(val);
+});
+
 const app = express();
 
 app.use(express.json());
